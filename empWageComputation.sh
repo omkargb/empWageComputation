@@ -3,15 +3,17 @@
 
 echo " Welcome to Employee Wage Computation Program "
 
-#UC1 : Checking employee attendance
-
 ispresent=1
+workHrs=8
+wagePerHr=20
 
 randomCheck=$((RANDOM%2))
 
 if [ $ispresent -eq $randomCheck ]
 then
 	echo " Employee is present. "
+	salary=$(($wagePerHr * $workHrs))
 else
 	echo " Employee is absent. "
+	salary=0
 fi
