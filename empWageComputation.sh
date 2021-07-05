@@ -1,30 +1,35 @@
 # !/bin/bash -x
 #created by : Mr. Omkar G Bapat
 
-echo " Welcome to Employee Wage Computation Program "
+printf " Welcome to Employee Wage Computation Program \n"
 
 wagePerHr=20
 
 isFullTime=2
 isPartTime=1
 # default : isAbsent=0
+monthSalary=0
+workingDays=20
 
-randomCheck=$((RANDOM%3))
+echo " [ Checking employee attendance and calculating a month's salary ] "
 
-echo " Checking employee attendance and calculating day salary "
-
-case $randomvalue in
-	$isFullTime)	echo " Employee is present Full Time. "
+for (( day=1; day<=$workingDays; day++ ))
+do
+    randomCheck=$((RANDOM%3));
+	case $randomCheck in
+	$isFullTime)	# echo " Employee is present Full Time. "
 			workHrs=8
 			;;
-	$isPartTime)	echo " Employee is present Part Time. "
+	$isPartTime)	# echo " Employee is present Part Time. "
 			workHrs=4
 			;;
-	*)		echo " Employee is absent. "
+	*)		# echo " Employee is absent. "
         		workHrs=0
 			;;
-esac
+	esac
 
-salary=$(($wagePerHr * $workHrs))
+    salary=$(($wagePerHr*$workHrs));
+    monthSalary=$(($salary+$monthSalary));
+done
 
-echo " Day Salary : $salary"
+echo " 1 Month's Salary : $monthSalary"
