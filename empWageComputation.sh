@@ -1,7 +1,7 @@
-# !/bin/bash -x
+#!/bin/bash -x
 #created by : Mr. Omkar G Bapat
 
-printf " Welcome to Employee Wage Computation Program \n"
+printf " Welcome to Employee Wage Computation Program \n\n"
 
 isFullTime=2
 isPartTime=1
@@ -46,11 +46,14 @@ do
     ((totalWorkingDays++))
 done
 
+#displaying daily wage
+printf "\n Day \t Wage \n ------------------ \n"
+
 for value in ${!dailyWage[@]}
 do
-	echo " $value = ${dailyWage[$value]} "
+	printf " $value \t ${dailyWage[$value]} \n"
 done
 
 monthSalary=$(($wagePerHr*$totalEmpHrs));
 
-echo " Total wage : $monthSalary "
+printf "\n 1 Month's total wage : $monthSalary \n"
