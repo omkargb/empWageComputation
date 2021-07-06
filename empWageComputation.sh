@@ -17,19 +17,24 @@ totalWorkingDays=0
 
 echo " [ Checking employee attendance and calculating a month's salary ] "
 
+function getWorkHours()
+{
+	case $1 in
+		$isFullTime)	workHrs=8
+				;;
+		$isPartTime)	workHrs=4
+				;;
+		*)		workHrs=0
+				;;
+	esac
+	echo $workHrs
+}
+
 while [ $totalEmpHrs -lt $maxWorkingHrs ] && [ $totalWorkingDays -lt $maxWorkingDays ]
 do
-    randomCheck=$((RANDOM%3));
-	case $randomCheck in
-	$isFullTime)	workHrs=8
-			;;
-	$isPartTime)	workHrs=4
-			;;
-	*)		workHrs=0
-			;;
-	esac
-
     ((totalWorkingDays++))
+    randomCheck=$((RANDOM%3));
+    workHrs=$( getWorkHours $randomCheck )
     totalEmpHrs=$(($workHrs+$totalEmpHrs));
 done
 
