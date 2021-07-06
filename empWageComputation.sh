@@ -15,6 +15,9 @@ maxWorkingHrs=100
 totalEmpHrs=0
 totalWorkingDays=0
 
+#array for storing daily wage
+declare -a dailyWage
+
 echo " [ Checking employee attendance and calculating a month's salary ] "
 
 function getWorkHours()
@@ -32,12 +35,18 @@ function getWorkHours()
 
 while [ $totalEmpHrs -lt $maxWorkingHrs ] && [ $totalWorkingDays -lt $maxWorkingDays ]
 do
-    ((totalWorkingDays++))
     randomCheck=$((RANDOM%3));
     workHrs=$( getWorkHours $randomCheck )
     totalEmpHrs=$(($workHrs+$totalEmpHrs));
+
+    dayWage=$(($workHrs*$wagePerHr))
+    dailyWage[$totalWorkingDays]=$dayWage
+
+    ((totalWorkingDays++))
 done
+
+echo " Daily wage values : ${dailyWage[@]} "
 
 monthSalary=$(($wagePerHr*$totalEmpHrs));
 
-echo " 1 Month's Salary : $monthSalary "
+echo " Total wage : $monthSalary "
