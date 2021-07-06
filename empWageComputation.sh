@@ -3,33 +3,36 @@
 
 printf " Welcome to Employee Wage Computation Program \n"
 
-wagePerHr=20
-
 isFullTime=2
 isPartTime=1
 # default : isAbsent=0
 monthSalary=0
-workingDays=20
+
+wagePerHr=20
+maxWorkingDays=20
+maxWorkingHrs=100
+
+totalEmpHrs=0
+totalWorkingDays=0
 
 echo " [ Checking employee attendance and calculating a month's salary ] "
 
-for (( day=1; day<=$workingDays; day++ ))
+while [ $totalEmpHrs -lt $maxWorkingHrs ] && [ $totalWorkingDays -lt $maxWorkingDays ]
 do
     randomCheck=$((RANDOM%3));
 	case $randomCheck in
-	$isFullTime)	# echo " Employee is present Full Time. "
-			workHrs=8
+	$isFullTime)	workHrs=8
 			;;
-	$isPartTime)	# echo " Employee is present Part Time. "
-			workHrs=4
+	$isPartTime)	workHrs=4
 			;;
-	*)		# echo " Employee is absent. "
-        		workHrs=0
+	*)		workHrs=0
 			;;
 	esac
 
-    salary=$(($wagePerHr*$workHrs));
-    monthSalary=$(($salary+$monthSalary));
+    ((totalWorkingDays++))
+    totalEmpHrs=$(($workHrs+$totalEmpHrs));
 done
 
-echo " 1 Month's Salary : $monthSalary"
+monthSalary=$(($wagePerHr*$totalEmpHrs));
+
+echo " 1 Month's Salary : $monthSalary "
